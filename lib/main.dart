@@ -34,7 +34,8 @@ class MyHomePage extends StatelessWidget {
         appBar: AppBar(
           title: Text('Flutter App'),
         ),
-        body: Column(children: [
+        body:
+            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           Container(
               width: double.infinity,
               child: Card(
@@ -45,8 +46,15 @@ class MyHomePage extends StatelessWidget {
           Column(
               children: transactions.map((tx) {
             return Card(
-              child: Text(tx.title),
-            );
+                child: Row(
+              children: [
+                Text(tx.amount),
+                Column(children: [
+                  Text(tx.title),
+                  Text(tx.date.toString()),
+                ]),
+              ],
+            ));
           }).toList())
         ]));
   }
