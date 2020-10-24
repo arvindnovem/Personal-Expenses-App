@@ -4,6 +4,16 @@ import './transactions.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter App',
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
   final List<Transactions> transactions = [
     Transactions(
       id: 't1',
@@ -20,16 +30,6 @@ class MyApp extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter App',
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text('Flutter App'),
@@ -42,10 +42,12 @@ class MyHomePage extends StatelessWidget {
                 child: Text("PICKUP"),
                 elevation: 5,
               )),
-          Card(
-            child: Text("Arvind"),
-            elevation: 7,
-          )
+          Column(
+              children: transactions.map((tx) {
+            return Card(
+              child: Text(tx.title),
+            );
+          }).toList())
         ]));
   }
 }
