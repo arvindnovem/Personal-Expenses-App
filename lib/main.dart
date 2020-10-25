@@ -51,7 +51,7 @@ class MyHomePage extends StatelessWidget {
                 Container(
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 5)),
+                        border: Border.all(color: Colors.purple, width: 5)),
                     padding: EdgeInsets.all(10),
                     child: Text(
                       tx.amount.toString(),
@@ -60,8 +60,10 @@ class MyHomePage extends StatelessWidget {
                           fontSize: 20,
                           color: Colors.purple),
                     )),
-                Column(children: [
-                  Text(tx.title),
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text(tx.title,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                   Text(tx.date.toString()),
                 ]),
               ],
