@@ -18,13 +18,13 @@ class MyHomePage extends StatelessWidget {
     Transactions(
       id: 't1',
       title: "New Shoes",
-      amount: "69.99",
+      amount: 69.99,
       date: DateTime.now(),
     ),
     Transactions(
       id: 't2',
       title: "New Dress",
-      amount: "89.99",
+      amount: 89.99,
       date: DateTime.now(),
     ),
   ];
@@ -46,20 +46,24 @@ class MyHomePage extends StatelessWidget {
           Column(
               children: transactions.map((tx) {
             return Card(
-                child: Container(
+                child: Row(
+              children: [
+                Container(
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.black, width: 5)),
                     padding: EdgeInsets.all(10),
-                    child: Row(
-                      children: [
-                        Text(tx.title),
-                        Column(children: [
-                          Text(tx.title),
-                          Text(tx.date.toString()),
-                        ]),
-                      ],
-                    )));
+                    child: Text(
+                      tx.amount.toString(),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    )),
+                Column(children: [
+                  Text(tx.title),
+                  Text(tx.date.toString()),
+                ]),
+              ],
+            ));
           }).toList())
         ]));
   }
