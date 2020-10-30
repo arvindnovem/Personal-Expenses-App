@@ -44,6 +44,7 @@ class _NewTransactionState extends State<NewTransaction> {
               ),
               TextField(
                 decoration: InputDecoration(labelText: 'Amount'),
+                keyboardType: TextInputType.number,
                 controller: amountcontroller,
                 onSubmitted: (val) => submitData(),
               ),
