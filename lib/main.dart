@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expenses_app/widgets/user_transaction.dart';
+import 'package:personal_expenses_app/widgets/new_transaction.dart';
+import './widgets/transaction_list.dart';
+import 'models/transactions.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +15,50 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final List<Transactions> _usertransactions = [
+    Transactions(
+      id: 't1',
+      title: "New Shoes",
+      amount: 69.99,
+      date: DateTime.now(),
+    ),
+    Transactions(
+      id: 't2',
+      title: "New Dress",
+      amount: 89.99,
+      date: DateTime.now(),
+    ),
+  ];
+  void _addNewTransaction(String txTitle, double txAmount) {
+    final newTx = Transactions(
+        title: txTitle,
+        amount: txAmount,
+        date: DateTime.now(),
+        id: DateTime.now().toString());
+    setState(() {
+      _usertransactions.add(newTx);
+    });
+  }
+
+  void _startAddNewTransaction(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          onTap: () {},
+          child: NewTransaction(_addNewTransaction),
+          behavior: HitTestBehavior.opaque,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,12 +77,12 @@ class MyHomePage extends StatelessWidget {
               child: Text("PICKUP"),
               elevation: 5,
             )),
-        UserTransactions()
+        TransactionList(_usertransactions),
       ])),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () => _startAddNewTransaction(context),
       ),
     );
   }
