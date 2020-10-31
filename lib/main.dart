@@ -12,9 +12,20 @@ class MyApp extends StatelessWidget {
       title: 'Personal Expenses',
       home: MyHomePage(),
       theme: ThemeData(
-        primarySwatch: Colors.purple,
-        accentColor: Colors.amber,
-      ),
+          primarySwatch: Colors.purple,
+          accentColor: Colors.amber,
+          fontFamily: 'Quicksand',
+          textTheme: ThemeData.light().textTheme.copyWith(
+              title: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold)),
+          appBarTheme: AppBarTheme(
+              textTheme: ThemeData.light().textTheme.copyWith(
+                  title: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)))),
     );
   }
 }
@@ -66,12 +77,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Personal Expenses'), actions: [
-        IconButton(
-          icon: Icon(Icons.add),
-          onPressed: () {},
-        )
-      ]),
+      appBar: AppBar(
+          title: Text(
+            'Personal Expenses',
+          ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {},
+            )
+          ]),
       body: SingleChildScrollView(
           child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
         Container(
