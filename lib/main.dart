@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:personal_expenses_app/widgets/new_transaction.dart';
 import './widgets/transaction_list.dart';
 import 'models/transactions.dart';
+import './widgets/chart.dart';
 
 void main() => runApp(MyApp());
 
@@ -50,6 +51,12 @@ class _MyHomePageState extends State<MyHomePage> {
     //   date: DateTime.now(),
     // ),
   ];
+  List<Transactions> get _recentTransactions {
+    return _usertransactions.where((tx) {
+      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
+
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transactions(
         title: txTitle,
@@ -84,20 +91,17 @@ class _MyHomePageState extends State<MyHomePage> {
           actions: [
             IconButton(
               icon: Icon(Icons.add),
-              onPressed: () {},
+              onPressed: () => _startAddNewTransaction(context),
             )
           ]),
       body: SingleChildScrollView(
-          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Container(
-            width: double.infinity,
-            child: Card(
-              color: Colors.blue,
-              child: Text("PICKUP"),
-              elevation: 5,
-            )),
-        TransactionList(_usertransactions),
-      ])),
+          child: Column(
+              //mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+            Chart(_recentTransactions),
+            TransactionList(_usertransactions),
+          ])),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
